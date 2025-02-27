@@ -15,7 +15,7 @@ public class BoardDAO {
 
 
     private BoardEntity insert(final BoardEntity entity)throws SQLException{
-
+        return null;
     }
 
     private void  delete(final Long id)throws SQLException{
@@ -23,7 +23,19 @@ public class BoardDAO {
     }
 
     private Optional<BoardEntity> findById(final Long id)throws SQLException{
-
+        var query = "SELECT * FROM boards WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setLong(1, id);
+            ps.executeQuery();
+            var resultSet = ps.getResultSet();
+            if (resultSet.next()){
+                var entity = new BoardEntity();
+                entity.setId(resultSet.getLong("id"));
+                entity.setName(resultSet.getString("name"));
+                return Optional.of(entity);
+            }
+           return Optional.empty();
+        }
     }
 
     private boolean existsBoard(final Long id)throws SQLException{
