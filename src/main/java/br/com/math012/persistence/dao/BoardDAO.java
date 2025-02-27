@@ -15,7 +15,13 @@ public class BoardDAO {
 
 
     private BoardEntity insert(final BoardEntity entity)throws SQLException{
-        return null;
+        var query = "INSERT INTO boards(name) VALUES (?)";
+        try (PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setString(1, entity.getName());
+            ps.executeUpdate();
+            entity.setId(ps.getResultSet().getLong("id"));
+            return entity;
+        }
     }
 
     private void  delete(final Long id)throws SQLException{
