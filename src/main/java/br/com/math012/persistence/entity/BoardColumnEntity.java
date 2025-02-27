@@ -9,4 +9,6 @@ public class BoardColumnEntity {
     private String nome;
     private int order;
     private BoardColumnKindEnum kind;
+    // Relacionamento entre entidades
+    private BoardEntity board = new BoardEntity();
 }
