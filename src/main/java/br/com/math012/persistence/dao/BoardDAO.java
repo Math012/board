@@ -19,7 +19,11 @@ public class BoardDAO {
     }
 
     private void  delete(final Long id)throws SQLException{
-
+        var query = "DELETE  FROM boards WHERE id=?";
+        try (PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setLong(1,id);
+            ps.executeUpdate();
+        }
     }
 
     private Optional<BoardEntity> findById(final Long id)throws SQLException{
