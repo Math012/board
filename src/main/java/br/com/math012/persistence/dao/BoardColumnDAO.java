@@ -2,12 +2,10 @@ package br.com.math012.persistence.dao;
 
 import br.com.math012.dto.BoardColumnDTO;
 import br.com.math012.persistence.entity.BoardColumnEntity;
-import br.com.math012.persistence.entity.BoardEntity;
 import br.com.math012.persistence.entity.CardEntity;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +14,8 @@ import java.util.Optional;
 import static br.com.math012.persistence.entity.enums.BoardColumnKindEnum.findByName;
 import static java.util.Objects.isNull;
 
-@AllArgsConstructor
-public class BoardDAO {
+@RequiredArgsConstructor
+public class BoardColumnDAO {
 
     private final Connection connection;
 
@@ -30,6 +28,7 @@ public class BoardDAO {
             statement.setString(i ++, entity.getKind().name());
             statement.setLong(i, entity.getBoard().getId());
             statement.executeUpdate();
+
             return entity;
         }
     }

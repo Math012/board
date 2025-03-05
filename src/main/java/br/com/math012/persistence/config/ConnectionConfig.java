@@ -17,7 +17,6 @@ public final class ConnectionConfig {
         String password = "1998";
         Connection connection = DriverManager.getConnection(url,user,password);
         connection.setAutoCommit(false);
-
         return connection;
     }
 }
